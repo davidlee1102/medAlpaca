@@ -1,5 +1,6 @@
 import os
 import sys
+import json
 from typing import Tuple, Union
 
 import fire
@@ -205,7 +206,10 @@ def main(
         model_max_length=model_max_length,
         train_on_inputs=train_on_inputs,
     )
-    data = load_dataset("json", data_files=data_path)
+    # data = load_dataset("json", data_files=data_path)
+
+    with open(data_path, "r") as f:
+        data = json.load(f)
 
     if val_set_size > 0:
         data = (
